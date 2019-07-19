@@ -37,35 +37,35 @@ File -> New -> Project
 
 Scroll down to MSTest Test Project (.Net Core), select it, then click "Next".
 
-<!-- ![](https://github.com/LindaBot/ScribrAPI/blob/MB/UnitTests/Partx-Unit%20Testing/images/CreateMSTestProject.png) -->
+![](https://github.com/LindaBot/ScribrAPI/blob/MB/UnitTests/Partx-Unit%20Testing/images/CreateMSTestProject.png)
 
-![Create New Project window - select MS Test Project and click Next](https://raw.githubusercontent.com/LindaBot/ScribrAPI/MB/UnitTests/Partx-Unit%20Testing/images/CreateMSTestProject.png?token=ADGKD46NW5PPCHCINH6N67K5FYUZC)
+<!-- ![Create New Project window - select MS Test Project and click Next](https://raw.githubusercontent.com/LindaBot/ScribrAPI/MB/UnitTests/Partx-Unit%20Testing/images/CreateMSTestProject.png?token=ADGKD46NW5PPCHCINH6N67K5FYUZC) -->
 
 Give the project a name. Make sure to select "Add to solution" as shown in the image below, then click "Create".
 
-<!-- ![](https://github.com/LindaBot/ScribrAPI/blob/MB/UnitTests/Partx-Unit%20Testing/images/CreateMSTestProject2.png) -->
+![](https://github.com/LindaBot/ScribrAPI/blob/MB/UnitTests/Partx-Unit%20Testing/images/CreateMSTestProject2.png)
 
-![Project configuration - give it a name and click Create](https://raw.githubusercontent.com/LindaBot/ScribrAPI/MB/UnitTests/Partx-Unit%20Testing/images/CreateMSTestProject2.png?token=ADGKD42DQYVBGGMRMDEB6HK5FYT74)
+<!-- ![Project configuration - give it a name and click Create](https://raw.githubusercontent.com/LindaBot/ScribrAPI/MB/UnitTests/Partx-Unit%20Testing/images/CreateMSTestProject2.png?token=ADGKD42DQYVBGGMRMDEB6HK5FYT74) -->
 
 ### Setting up the Test Project
 
 Start by adding a reference from the newly created test project to the API project. Right-click on the unit test project in the solution explorer:
 
-<!-- ![](https://github.com/LindaBot/ScribrAPI/blob/MB/UnitTests/Partx-Unit%20Testing/images/ProjectInSolExplorer.png) -->
+![](https://github.com/LindaBot/ScribrAPI/blob/MB/UnitTests/Partx-Unit%20Testing/images/ProjectInSolExplorer.png)
 
-![Right-click on the unit test project](https://raw.githubusercontent.com/LindaBot/ScribrAPI/MB/UnitTests/Partx-Unit%20Testing/images/ProjectInSolExplorer.png?token=ADGKD44IYHVDL2WNL5ZZDS25FYT4S)
+<!-- ![Right-click on the unit test project](https://raw.githubusercontent.com/LindaBot/ScribrAPI/MB/UnitTests/Partx-Unit%20Testing/images/ProjectInSolExplorer.png?token=ADGKD44IYHVDL2WNL5ZZDS25FYT4S) -->
 
 Then go Add -> Reference...
 
-<!-- ![Hover over Add, then click Reference](https://github.com/LindaBot/ScribrAPI/blob/MB/UnitTests/Partx-Unit%20Testing/images/AddReference.png) -->
+![Hover over Add, then click Reference](https://github.com/LindaBot/ScribrAPI/blob/MB/UnitTests/Partx-Unit%20Testing/images/AddReference.png)
 
-![Hover over Add, then click Reference](https://raw.githubusercontent.com/LindaBot/ScribrAPI/MB/UnitTests/Partx-Unit%20Testing/images/AddReference.png?token=ADGKD43VJT2NON245JE2FXS5FYT24)
+<!-- ![Hover over Add, then click Reference](https://raw.githubusercontent.com/LindaBot/ScribrAPI/MB/UnitTests/Partx-Unit%20Testing/images/AddReference.png?token=ADGKD43VJT2NON245JE2FXS5FYT24) -->
 
 In the Reference Manager window select the API project as show in the image below. Then select "Ok".
 
-<!-- ![](https://github.com/LindaBot/ScribrAPI/blob/MB/UnitTests/Partx-Unit%20Testing/images/AddMainProjectReference.png) -->
+![Reference Manager Window - tick the ScribrAPI project and click Ok](https://github.com/LindaBot/ScribrAPI/blob/MB/UnitTests/Partx-Unit%20Testing/images/AddMainProjectReference.png)
 
-![Reference Manager Window - tick the ScribrAPI project and click Ok](https://raw.githubusercontent.com/LindaBot/ScribrAPI/MB/UnitTests/Partx-Unit%20Testing/images/AddMainProjectReference.png?token=ADGKD424TCADI3TW6JUNPQC5FYU3Y)
+<!-- ![Reference Manager Window - tick the ScribrAPI project and click Ok](https://raw.githubusercontent.com/LindaBot/ScribrAPI/MB/UnitTests/Partx-Unit%20Testing/images/AddMainProjectReference.png?token=ADGKD424TCADI3TW6JUNPQC5FYU3Y) -->
 
 Now we are going to add a couple of packages that will let us use a mock database (More on this in a bit).
 Right-click on the project solution and select "Manage NuGet Packages for solution"
