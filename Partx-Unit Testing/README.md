@@ -262,7 +262,6 @@ public async Task TestGetSuccessfully()
         ActionResult<IEnumerable<Transcription>> result = await transcriptionsController.GetTranscription();
 
         Assert.IsNotNull(result);
-        Assert.IsInstanceOfType(result, typeof(IEnumerable<Transcription>));
         // i should really check to make sure the exact transcriptions are in there, but that requires an equality comparer,
         // which requires a whole nested class, thanks to C#'s lack of anonymous classes that implement interfaces
     }
