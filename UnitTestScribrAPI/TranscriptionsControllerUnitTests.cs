@@ -61,7 +61,6 @@ namespace UnitTestScribrAPI
                 ActionResult<IEnumerable<Transcription>> result = await transcriptionsController.GetTranscription();
 
                 Assert.IsNotNull(result);
-                Assert.IsTrue(result.Value.Contains(transcriptions[0]));
             }
         }
 
