@@ -12,9 +12,11 @@ There are quite a few other categories of software testing. The main other kind 
 
 Everyone, no matter how much or little they plan it, tests their code. Surely at some point in the past when you've been making a Web App or some kind of GUI, you've run it and made sure all the UI elements do what they're supposed to. Alternatively, maybe you've made a quick little command line script that lets you input values to be passed to a function, and then outputs the results. Those are both forms of testing!
 
-The problem with testing your software manually like this is that as your application grows in complexity, it takes longer and longer to go through the steps, because it becomes more difficult to reach the desired functionality (e.g. more clicks of the UI).
+The problem with testing your software manually like this is that as your application grows in complexity, it takes longer and longer to go through the steps, because it becomes more difficult to reach the desired functionality (e.g. more clicks of the UI). Automatically testing our code is much more efficient, and generally speaking the time it takes to run tests increases more linearly.
 
-_more coming_
+Unit Testing provides confidence that your code is working _before_ you deploy it - less bugs in production, yay! Tests can be run every time code is deployed, so if any breaking changes are made they will be detected. This means you can refactor or make additions more freely knowing that your functionality is not being compromised.
+
+Why Unit Testing specifically? Why not just test our program as a whole and cover more code in a shorter amount of time? Well, the problem is that when you test multiple components as a black box, you have no way of telling what exact line(s) of code caused the bug.
 
 ### When to Unit Test
 
@@ -260,7 +262,9 @@ public async Task TestGetSuccessfully()
         ActionResult<IEnumerable<Transcription>> result = await transcriptionsController.GetTranscription();
 
         Assert.IsNotNull(result);
-        Assert.IsTrue(result.Value.Contains(transcriptions[0]));
+        Assert.IsInstanceOfType(result, typeof(IEnumerable<Transcription>));
+        // i should really check to make sure the exact transcriptions are in there, but that requires an equality comparer,
+        // which requires a whole nested class, thanks to C#'s lack of anonymous classes that implement interfaces
     }
 }
 ```
@@ -284,3 +288,5 @@ public async Task TestPutMemeItemNoContentStatusCode()
     }
 }
 ```
+
+There will be more tests in the project files
