@@ -4,17 +4,21 @@ For those of you lucky souls who have already learnt about Unit Testing at uni o
 
 ## About Unit Testing
 
-Unit Testing is a form of Automated Testing, which is simply the practice of writing code that tests your application code. An individual test will pass some inputs to your code and make sure that the outputs are correct. If they aren't, the test fails, otherwise, it passes. A Unit Test is the lowest form of test and tests an individual *unit* of software - that is, individual methods/functions and classes.
+Unit Testing is a form of Automated Testing, which is simply the practice of writing code that tests your application code. An individual test will pass some inputs to your code and make sure that the outputs are correct. If they aren't, the test fails. Otherwise, it passes. A Unit Test is the lowest form of test and tests an individual _unit_ of software - that is, individual methods/functions and classes.
 
 There are quite a few other categories of software testing. The main other kind of automated test that you'll hear talked about is the integration test, which tests multiple parts of your software working together along with external dependencies such as databases (making sure your units work when you put them together). We won't be covering integration testing as it's more important for projects of bigger scope, but it's good to be aware of what it is.
 
 ### Why do we Unit Test?
 
-Because
+Everyone, no matter how much or little they plan it, tests their code. Surely at some point in the past when you've been making a Web App or some kind of GUI, you've run it and made sure all the UI elements do what they're supposed to. Alternatively, maybe you've made a quick little command line script that lets you input values to be passed to a function, and then outputs the results. Those are both forms of testing!
+
+The problem with testing your software manually like this is that as your application grows in complexity, it takes longer and longer to go through the steps, because it becomes more difficult to reach the desired functionality (e.g. more clicks of the UI).
+
+_more coming_
 
 ### When to Unit Test
 
-One of the biggest debates surrounding software testing is whether or not you should write your test *before* or *after* the actual code. Many people say you should write your tests for a class/module before you implement it. This is known as Test-Driven Development (TDD). Whether or not this is actually the case in practice is another story...
+One of the biggest debates surrounding software testing is whether or not you should write your test _before_ or _after_ the actual code. Many people say you should write your tests for a class/module before you implement it. This is known as Test-Driven Development (TDD). Whether or not this is actually the case in practice is another story...
 
 The main arguments for TDD are that it provides clarity and motivation for simplicity. By writing the tests for a unit before you implement it, you get to think about the requirements of your code so you get a better idea of how to write it because you understand what it should do. Additionally, you shouldn't theoretically add any unnecessary functionality because you're only writing the code so that it passes the tests - ergo, simplicity!
 
@@ -34,44 +38,75 @@ File -> New -> Project
 Scroll down to MSTest Test Project (.Net Core), select it, then click "Next".
 
 <!-- ![](https://github.com/LindaBot/ScribrAPI/blob/MB/UnitTests/Partx-Unit%20Testing/images/CreateMSTestProject.png) -->
+
 ![Create New Project window - select MS Test Project and click Next](https://raw.githubusercontent.com/LindaBot/ScribrAPI/MB/UnitTests/Partx-Unit%20Testing/images/CreateMSTestProject.png?token=ADGKD46NW5PPCHCINH6N67K5FYUZC)
 
 Give the project a name. Make sure to select "Add to solution" as shown in the image below, then click "Create".
+
 <!-- ![](https://github.com/LindaBot/ScribrAPI/blob/MB/UnitTests/Partx-Unit%20Testing/images/CreateMSTestProject2.png) -->
+
 ![Project configuration - give it a name and click Create](https://raw.githubusercontent.com/LindaBot/ScribrAPI/MB/UnitTests/Partx-Unit%20Testing/images/CreateMSTestProject2.png?token=ADGKD42DQYVBGGMRMDEB6HK5FYT74)
 
 ### Setting up the Test Project
 
 Start by adding a reference from the newly created test project to the API project. Right-click on the unit test project in the solution explorer:
+
 <!-- ![](https://github.com/LindaBot/ScribrAPI/blob/MB/UnitTests/Partx-Unit%20Testing/images/ProjectInSolExplorer.png) -->
+
 ![Right-click on the unit test project](https://raw.githubusercontent.com/LindaBot/ScribrAPI/MB/UnitTests/Partx-Unit%20Testing/images/ProjectInSolExplorer.png?token=ADGKD44IYHVDL2WNL5ZZDS25FYT4S)
 
 Then go Add -> Reference...
+
 <!-- ![Hover over Add, then click Reference](https://github.com/LindaBot/ScribrAPI/blob/MB/UnitTests/Partx-Unit%20Testing/images/AddReference.png) -->
+
 ![Hover over Add, then click Reference](https://raw.githubusercontent.com/LindaBot/ScribrAPI/MB/UnitTests/Partx-Unit%20Testing/images/AddReference.png?token=ADGKD43VJT2NON245JE2FXS5FYT24)
 
 In the Reference Manager window select the API project as show in the image below. Then select "Ok".
+
 <!-- ![](https://github.com/LindaBot/ScribrAPI/blob/MB/UnitTests/Partx-Unit%20Testing/images/AddMainProjectReference.png) -->
+
 ![Reference Manager Window - tick the ScribrAPI project and click Ok](https://raw.githubusercontent.com/LindaBot/ScribrAPI/MB/UnitTests/Partx-Unit%20Testing/images/AddMainProjectReference.png?token=ADGKD424TCADI3TW6JUNPQC5FYU3Y)
 
-Now we're going to add a couple of packages that will let us use a mock database (More on this in a bit).
+Now we are going to add a couple of packages that will let us use a mock database (More on this in a bit).
 Right-click on the project solution and select "Manage NuGet Packages for solution"
 Add to the solution:
 
-* Microsoft.EntityFrameworkCore
-* Microsoft.EntityFrameworkCore.InMemory
+- Microsoft.EntityFrameworkCore
+- Microsoft.EntityFrameworkCore.InMemory
+
+### Possible Error
+
+```
+Severity	Code	Description	Project	File	Line	Suppression State
+Error	CS1705	Assembly 'ScribrAPI' with identity 'ScribrAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null' uses 'Microsoft.AspNetCore.Mvc.Core, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60' which has a higher version than referenced assembly 'Microsoft.AspNetCore.Mvc.Core' with identity 'Microsoft.AspNetCore.Mvc.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60'	UnitTestScribrAPI
+```
+
+If you get an error similar to the one above then do the following.
+
+- Right click on the API project
+- select "Unload"
+- right click on the unloaded project and select edit \*.csproj
+
+Ensure the following appears in the \*.csproj file
+
+```xml
+<PackageReference Include="Microsoft.AspNetCore.App" Version="2.2.0" />
+```
+
+Then reload the API project and select clean and rebuild.
 
 ### Let the Testing begin
 
 Now we can start testing.
 
-* Right-click on the test project
-* select (add -> New Item)
-* create a new .cs file. Let's call it UnitTest
+- Delete the default UnitTest.cs file
+- Right-click on the test project
+- select (add -> New Item)
+- create a new .cs file. Let's call it TranscriptionsControllerUnitTests
 
-The code we're interested in testing is the code inside our API controllers, as this is where the actual logic is done for serving data.
+The code we are interested in testing is the code inside our API controllers, as this is where the actual logic is done for serving data. We will start by testing TranscriptionsController because it's easier to test than VideosController - you'll see why later.
 
-Copy the following snippet to the file. It has all the imports we'll need. The attribute (a.k.a annotation) `[TestClass]` placed before the class tells MSTest that this class has methods it can run as tests.
+Copy the following snippet to the file. It has all the imports we will need. The attribute (a.k.a annotation) `[TestClass]` placed before the class tells MSTest that this class has methods that can be run as tests.
 
 ```csharp
 using ScribrAPI.Controllers;
@@ -87,24 +122,165 @@ using System.Threading.Tasks;
 namespace UnitTestScribrAPI
 {
     [TestClass]
-    public class VideosControllerUnitTests
+    public class TranscriptionsControllerUnitTests
     {
       // Insert code here
     }
 }
 ```
 
-We will begin by defining all the class variables. Then we define what happens before a test is run and after a test is run. We want to initialise the mock database before a test runs and then we want to clear the mock database after a test runs. Making sure that all tests remain independent. By mocking the database we greatly improve the speed at which the tests can run as they do not have to stand up a real database.
+We will begin by adding the following class variable to the top of the class:
 
 ```csharp
-
+public static readonly DbContextOptions<scriberContext> options
+= new DbContextOptionsBuilder<scriberContext>()
+.UseInMemoryDatabase(databaseName: "testDatabase")
+.Options;
 ```
 
-Now we can begin writing the test methods to test the API. I suggest that you start by writing tests for all the CRUD methods.
+What this does is create a configuration object that will allow us to create a scriberContext object that will access an in-memory database (i.e. something that uses an in-memory database to store the model of our API). As you'll see soon, context objects can be destroyed and reinitialized elsewhere and still access the same database. By mocking the database we greatly improve the speed at which the tests can run as they do not have to make a call to a real database.
+
+Add in the following symbolic constant, which we will be used for populating the db:
 
 ```csharp
+public static readonly IList<Transcription> transcriptions = new List<Transcription>
+{
+    new Transcription()
+    {
+        Phrase = "That's like calling"
+    },
+    new Transcription()
+    {
+        Phrase = "your peanut butter sandwich"
+    }
+};
+```
 
+Now we will define what happens before and after a test is run. We want to initialise the mock database before a test runs and then we want to clear the mock database after a test runs. This makes sure that all tests remain independent.
+
+```csharp
+[TestInitialize]
+public void SetupDb()
+{
+    using (var context = new scriberContext(options))
+    {
+        // populate the db
+        context.Transcription.Add(transcriptions[0]);
+        context.Transcription.Add(transcriptions[1]);
+        context.SaveChanges();
+    }
+}
+
+[TestCleanup]
+public void ClearDb()
+{
+    using (var context = new scriberContext(options))
+    {
+        // clear the db
+        context.Transcription.RemoveRange(context.Transcription);
+        context.SaveChanges();
+    };
+}
+```
+
+So, so far our whole skeleton test file looks like:
+
+<details><summary>this (click to reveal)</summary>
+
+```csharp
+using ScribrAPI.Controllers;
+using ScribrAPI.Model;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
+using System.Linq;
+using Microsoft.Extensions.Configuration;
+using System.Threading.Tasks;
+
+namespace UnitTestScribrAPI
+{
+    [TestClass]
+    public class TranscriptionsControllerUnitTests
+    {
+        public static readonly DbContextOptions<scriberContext> options
+        = new DbContextOptionsBuilder<scriberContext>()
+        .UseInMemoryDatabase(databaseName: "testDatabase")
+        .Options;
+
+        public static readonly IList<Transcription> transcriptions = new List<Transcription>
+        {
+            new Transcription()
+            {
+                Phrase = "That's like calling"
+            },
+            new Transcription()
+            {
+                Phrase = "your peanut butter sandwich"
+            }
+        };
+
+        [TestInitialize]
+        public void SetupDb()
+        {
+            using (var context = new scriberContext(options))
+            {
+                // populate the db
+                context.Transcription.Add(transcriptions[0]);
+                context.Transcription.Add(transcriptions[1]);
+                context.SaveChanges();
+            }
+        }
+
+        [TestCleanup]
+        public void ClearDb()
+        {
+            using (var context = new scriberContext(options))
+            {
+                // clear the db
+                context.Transcription.RemoveRange(context.Transcription);
+                context.SaveChanges();
+            };
+        }
+    }
+}
+```
+
+</details>
+
+Now we can begin writing the test methods to test TranscriptionController. This is pretty trivial (TranscriptionController was scaffolded, i.e. auto-generated) so we just need to make sure all the CRUD operations work as we expect. In reality, because it was created automatically we don't _really_ need to unit test it, but here it is used for demonstration purposes.
+
+```csharp
+[TestMethod]
+public async Task TestGetSuccessfully()
+{
+    using (var context = new scriberContext(options))
+    {
+        TranscriptionsController transcriptionsController = new TranscriptionsController(context);
+        ActionResult<IEnumerable<Transcription>> result = await transcriptionsController.GetTranscription();
+
+        Assert.IsNotNull(result);
+        Assert.IsTrue(result.Value.Contains(transcriptions[0]));
+    }
+}
 ```
 
 ```csharp
+// unfortunately, it can be hard to avoid test method names that are also descriptive
+[TestMethod]
+public async Task TestPutMemeItemNoContentStatusCode()
+{
+    using (var context = new scriberContext(options))
+    {
+        string title = "this is now a different phrase";
+        Transcription transcription1 = context.Transcription.Where(x => x.Phrase == transcriptions[0].Phrase).Single();
+        transcription1.Phrase = title;
+
+        TranscriptionsController transcriptionsController = new TranscriptionsController(context);
+        IActionResult result = await transcriptionsController.PutTranscription(transcription1.TranscriptionId, transcription1) as IActionResult;
+
+        Assert.IsNotNull(result);
+        Assert.IsInstanceOfType(result, typeof(NoContentResult));
+    }
+}
 ```
