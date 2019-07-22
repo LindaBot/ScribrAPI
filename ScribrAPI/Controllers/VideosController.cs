@@ -125,6 +125,10 @@ namespace ScribrAPI.Controllers
                 return BadRequest("Subtitle does not exist on YouTube, failed to add video");
             }
 
+            if (VideoExists(video.VideoTitle)) {
+                return BadRequest("Video already exists in the database");
+            }
+
             // Add this video object to the database
             _context.Video.Add(video);
             await _context.SaveChangesAsync();
@@ -209,6 +213,11 @@ namespace ScribrAPI.Controllers
         private bool VideoExists(int id)
         {
             return _context.Video.Any(e => e.VideoId == id);
+        }
+
+        private bool VideoExists(String videoTitle)
+        {
+            return _context.Video.Any(e => e.VideoTitle.Equals(videoTitle));
         }
     }
 }
